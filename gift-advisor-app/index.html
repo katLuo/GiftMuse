@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>🎁 礼物顾问</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <h1>🎁 礼物顾问</h1>
+  <div id="auth-status">
+    <p>请先登录以开始使用</p>
+    <button id="login-btn">匿名登录</button>
+  </div>
+
+  <div id="app" style="display: none;">
+    <div class="mode-switch">
+      <button class="mode-btn active" data-mode="理性">🧠 理性</button>
+      <button class="mode-btn" data-mode="感性">🎨 感性</button>
+    </div>
+
+    <div class="toolbar">
+      <!-- 送礼对象选择器 -->
+      <div class="recipient-selector">
+        <label for="recipient-select">🎯 送礼对象：</label>
+        <select id="recipient-select">
+          <option value="">请选择</option>
+          <option value="朋友">👫 朋友</option>
+          <option value="亲人">🏠 亲人</option>
+          <option value="爱人">💕 爱人</option>
+          <option value="客户">💼 客户</option>
+          <option value="领导">📋 领导</option>
+        </select>
+      </div>
+
+      <!-- 可折叠维度面板 -->
+      <div class="dimension-panel">
+        <button id="toggle-dimension-btn" class="toggle-btn">
+          <span id="toggle-icon">▶</span> 分析维度
+        </button>
+        <div id="dimension-options" class="dimension-options-collapsible" style="display: none;">
+          <button class="dim-option-inline" data-dim="zodiac">♈ 星座</button>
+          <button class="dim-option-inline" data-dim="mbti">🧩 MBTI</button>
+          <button class="dim-option-inline" data-dim="bazi">📅 生辰喜用</button>
+          <button class="dim-option-inline" data-dim="tarot">✨ 塔罗牌</button>
+        </div>
+      </div>
+
+      <div id="active-tags" class="tags-area"></div>
+    </div>
+
+    <div id="chat-box"></div>
+
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="和礼物顾问聊聊..." autocomplete="off">
+      <button id="send-btn">发送</button>
+    </div>
+  </div>
+
+  <!-- 塔罗抽牌界面 -->
+  <div id="tarot-modal" class="tarot-overlay" style="display: none;">
+    <div class="tarot-container">
+      <div class="tarot-header">
+        <h2>✨ 塔罗牌 · 三张启示</h2>
+        <p id="tarot-instruction">请点击牌背，抽取你的第一张牌</p>
+        <p id="tarot-progress">已抽取：0 / 3</p>
+      </div>
+      <div id="tarot-grid" class="tarot-grid"></div>
+      <div id="tarot-result-area" class="tarot-result-area">
+        <h3>🃏 你抽取的牌</h3>
+        <div id="tarot-drawn-cards" class="tarot-drawn-cards"></div>
+        <div id="tarot-interpretation" class="tarot-interpretation"></div>
+      </div>
+      <div class="tarot-footer">
+        <button id="tarot-confirm-btn" class="tarot-confirm-btn" disabled>完成抽牌，获取礼物建议</button>
+        <button id="tarot-cancel-btn" class="tarot-cancel-btn">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
